@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_convert/
+*.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+venv/
+ENV/
+env/
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+*.csv
+*.xlsx
+*.xls
+*.h5
+*.parquet
+*.zip
+*.tar
+*.gz
+data/
+datasets/
+outputs/
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# Reports
+*.pdf
+*.docx
+*.pptx
+
+# Cache and temporary
+*.tmp
+*.bak
+*.swp
+.cache/
+__MACOSX/
