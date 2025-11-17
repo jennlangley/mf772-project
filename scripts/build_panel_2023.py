@@ -65,10 +65,15 @@ df = df[df["cum_evt"] <= 1].drop(columns="cum_evt")
 df["y_next"] = df.groupby("loan_id")["event_prepay"].shift(-1).fillna(0).astype(int)
 
 # ---- feature engineering: age + seasonality ----
+# first month per loan
 first_m = df.groupby("loan_id")["act_period_dt"].transform("min")
-df["age_m"] = (
-    df["act_period_dt"].dt.to_period("M") - first_m.dt.to_period("M")
-).astype(int).clip(lower=0)
+
+# convert to "month index" = year*12 + month
+cur_month_index   = df["act_period_dt"].dt.year * 12 + df["act_period_dt"].dt.month
+start_month_index = first_m.dt.year * 12 + first_m.dt.month
+
+df["age_m"] = (cur_month_index - start_month_index).clip(lower=0)
+
 
 m = df["act_period_dt"].dt.month
 df["season_sin"] = np.sin(2 * np.pi * m / 12.0)
