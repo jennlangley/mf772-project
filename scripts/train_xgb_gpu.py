@@ -31,8 +31,15 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
-# choose tree_method/device depending on xgboost version
-# try hist + device="cuda" (xgboost>=2.0); if it errors, switch to tree_method="gpu_hist"
+# save feature names used in training
+MODEL_DIR = ROOT / "models"
+MODEL_DIR.mkdir(parents=True, exist_ok=True)
+feature_list_path = MODEL_DIR / "xgb_features_2023Q1.txt"
+with open(feature_list_path, "w") as f:
+    for col in X_train.columns:
+        f.write(col + "\n")
+print("Saved feature list to", feature_list_path)
+
 model = xgb.XGBClassifier(
     n_estimators=400,
     max_depth=6,
@@ -42,7 +49,7 @@ model = xgb.XGBClassifier(
     reg_lambda=1.0,
     objective="binary:logistic",
     tree_method="hist",
-    device="cuda",    # if this errors, change to: tree_method="gpu_hist" and remove device
+    device="cuda",    
     eval_metric="auc",
     n_jobs=4,
 )
