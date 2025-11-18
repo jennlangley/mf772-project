@@ -3,6 +3,10 @@ data/
 *.csv
 *.xlsx
 
+# include data
+!models/xgb_feature_importance_2023Q1.csv
+!data/processed/cpr_vs_fncl_2023Q1.csv
+
 # ignore ALL parquet by default
 *.parquet
 
