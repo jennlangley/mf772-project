@@ -1,0 +1,14 @@
+# Raw / huge data
+data/
+*.csv
+*.xlsx
+
+# ignore ALL parquet by default
+*.parquet
+
+# Python / OS junk
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
